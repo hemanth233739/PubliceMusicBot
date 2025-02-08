@@ -1,210 +1,77 @@
-from pyrogram import Client
-
+from pyrogram import Client, errors
 import config
-
 from ..logging import LOGGER
 
-assistants = []
-assistantids = []
-
-
-class Userbot(Client):
+class Userbot:
     def __init__(self):
-        self.one = Client(
-            name="AnonXAss1",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            session_string=str(config.STRING1),
-            no_updates=True,
-        )
-        self.two = Client(
-            name="AnonXAss2",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            session_string=str(config.STRING2),
-            no_updates=True,
-        )
-        self.three = Client(
-            name="AnonXAss3",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            session_string=str(config.STRING3),
-            no_updates=True,
-        )
-        self.four = Client(
-            name="AnonXAss4",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            session_string=str(config.STRING4),
-            no_updates=True,
-        )
-        self.five = Client(
-            name="AnonXAss5",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            session_string=str(config.STRING5),
-            no_updates=True,
-        )
+        self.assistants = []
+        self.assistant_ids = []
+
+        self.sessions = {
+            "AnonXAss1": config.STRING1,
+            "AnonXAss2": config.STRING2,
+            "AnonXAss3": config.STRING3,
+            "AnonXAss4": config.STRING4,
+            "AnonXAss5": config.STRING5,
+        }
 
     async def start(self):
-        LOGGER(__name__).info(f"Starting Assistants...")
-        if config.STRING1:
-            await self.one.start()
-            try:
-                await self.one.join_chat("AmBotYT")
-                await self.one.join_chat("AM_YTSupport")
-                await self.one.join_chat("AbhiModszYT_Return")
-                await self.one.join_chat("AM_Unfban")
-                await self.one.join_chat("Logs_Gban")
-                await self.one.join_chat("About_AMBot")
-                await self.one.join_chat("Fbans_Logs")
-                await self.one.join_chat("SpicyEmpireSupport")
-                await self.one.join_chat("SpicyEmpire")
-                await self.one.join_chat("SpicyEmpireFban")
-            except:
-                pass
-            assistants.append(1)
-            try:
-                await self.one.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 1 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
-                )
-                exit()
-            self.one.id = self.one.me.id
-            self.one.name = self.one.me.mention
-            self.one.username = self.one.me.username
-            assistantids.append(self.one.id)
-            LOGGER(__name__).info(f"Assistant Started as {self.one.name}")
+        LOGGER(__name__).info("Starting Assistants...")
 
-        if config.STRING2:
-            await self.two.start()
-            try:
-                await self.two.join_chat("AmBotYT")
-                await self.two.join_chat("AM_YTSupport")
-                await self.two.join_chat("AbhiModszYT_Return")
-                await self.two.join_chat("AM_Unfban")
-                await self.two.join_chat("Logs_Gban")
-                await self.two.join_chat("About_AMBot")
-                await self.two.join_chat("Fbans_Logs")
-                await self.two.join_chat("SpicyEmpireSupport")
-                await self.two.join_chat("SpicyEmpire")
-                await self.two.join_chat("SpicyEmpireFban")
-            except:
-                pass
-            assistants.append(2)
-            try:
-                await self.two.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 2 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
-                )
-                exit()
-            self.two.id = self.two.me.id
-            self.two.name = self.two.me.mention
-            self.two.username = self.two.me.username
-            assistantids.append(self.two.id)
-            LOGGER(__name__).info(f"Assistant Two Started as {self.two.name}")
+        for name, session in self.sessions.items():
+            if not session:
+                continue  # Skip if session string is missing
 
-        if config.STRING3:
-            await self.three.start()
-            try:
-                await self.three.join_chat("AmBotYT")
-                await self.three.join_chat("AM_YTSupport")
-                await self.three.join_chat("AbhiModszYT_Return")
-                await self.three.join_chat("AM_Unfban")
-                await self.three.join_chat("Logs_Gban")
-                await self.three.join_chat("About_AMBot")
-                await self.three.join_chat("Fbans_Logs")
-                await self.three.join_chat("SpicyEmpireSupport")
-                await self.three.join_chat("SpicyEmpire")
-                await self.three.join_chat("SpicyEmpireFban")
-            except:
-                pass
-            assistants.append(3)
-            try:
-                await self.three.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 3 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
-                )
-                exit()
-            self.three.id = self.three.me.id
-            self.three.name = self.three.me.mention
-            self.three.username = self.three.me.username
-            assistantids.append(self.three.id)
-            LOGGER(__name__).info(f"Assistant Three Started as {self.three.name}")
+            client = Client(
+                name=name,
+                api_id=config.API_ID,
+                api_hash=config.API_HASH,
+                session_string=session,
+                no_updates=True,
+            )
 
-        if config.STRING4:
-            await self.four.start()
             try:
-                await self.four.join_chat("AmBotYT")
-                await self.four.join_chat("AM_YTSupport")
-                await self.four.join_chat("AbhiModszYT_Return")
-                await self.four.join_chat("AM_Unfban")
-                await self.four.join_chat("Logs_Gban")
-                await self.four.join_chat("About_AMBot")
-                await self.four.join_chat("Fbans_Logs")
-                await self.four.join_chat("SpicyEmpireSupport")
-                await self.four.join_chat("SpicyEmpire")
-                await self.four.join_chat("SpicyEmpireFban")
-            except:
-                pass
-            assistants.append(4)
-            try:
-                await self.four.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 4 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
-                )
-                exit()
-            self.four.id = self.four.me.id
-            self.four.name = self.four.me.mention
-            self.four.username = self.four.me.username
-            assistantids.append(self.four.id)
-            LOGGER(__name__).info(f"Assistant Four Started as {self.four.name}")
+                await client.start()
+                bot_info = await client.get_me()  # Fetch bot info after start
 
-        if config.STRING5:
-            await self.five.start()
-            try:
-                await self.five.join_chat("AmBotYT")
-                await self.five.join_chat("AM_YTSupport")
-                await self.five.join_chat("AbhiModszYT_Return")
-                await self.five.join_chat("AM_Unfban")
-                await self.five.join_chat("Logs_Gban")
-                await self.five.join_chat("About_AMBot")
-                await self.five.join_chat("Fbans_Logs")
-                await self.five.join_chat("SpicyEmpireSupport")
-                await self.five.join_chat("SpicyEmpire")
-                await self.five.join_chat("SpicyEmpireFban")
-            except:
-                pass
-            assistants.append(5)
-            try:
-                await self.five.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 5 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
-                )
-                exit()
-            self.five.id = self.five.me.id
-            self.five.name = self.five.me.mention
-            self.five.username = self.five.me.username
-            assistantids.append(self.five.id)
-            LOGGER(__name__).info(f"Assistant Five Started as {self.five.name}")
+                self.assistants.append(client)
+                self.assistant_ids.append(bot_info.id)
+
+                LOGGER(__name__).info(f"Assistant {bot_info.mention} Started.")
+
+                # Join required chats
+                chat_list = [
+                    "AmBotYT", "AM_YTSupport", "AbhiModszYT_Return",
+                    "AM_Unfban", "Logs_Gban", "About_AMBot",
+                    "Fbans_Logs", "SpicyEmpireSupport", "SpicyEmpire",
+                    "SpicyEmpireFban"
+                ]
+
+                for chat in chat_list:
+                    try:
+                        await client.join_chat(chat)
+                    except errors.RPCError as e:
+                        LOGGER(__name__).warning(f"Failed to join {chat}: {e}")
+
+                # Log assistant startup in the logging group
+                try:
+                    await client.send_message(config.LOGGER_ID, "Assistant Started")
+                except errors.RPCError as e:
+                    LOGGER(__name__).error(
+                        f"Assistant {bot_info.mention} failed to access the log group. "
+                        "Ensure the assistant is added and promoted. Error: {e}"
+                    )
+                    await client.stop()
+                    continue
+
+            except Exception as e:
+                LOGGER(__name__).error(f"Failed to start {name}: {e}")
+                continue  # Move to the next assistant
 
     async def stop(self):
-        LOGGER(__name__).info(f"Stopping Assistants...")
-        try:
-            if config.STRING1:
-                await self.one.stop()
-            if config.STRING2:
-                await self.two.stop()
-            if config.STRING3:
-                await self.three.stop()
-            if config.STRING4:
-                await self.four.stop()
-            if config.STRING5:
-                await self.five.stop()
-        except:
-            pass
+        LOGGER(__name__).info("Stopping Assistants...")
+        for client in self.assistants:
+            try:
+                await client.stop()
+            except Exception as e:
+                LOGGER(__name__).warning(f"Error stopping assistant {client.name}: {e}")
