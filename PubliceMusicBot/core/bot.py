@@ -48,7 +48,7 @@ class PubliceMusic(Client):
             return
         except Exception as ex:
             LOGGER(__name__).error(
-                f"Failed to access the log group/channel. Reason: {type(ex).__name__}."
+                f"Bot has failed to access the log group/channel.\nReason: {type(ex).__name__} - {str(ex)}"
             )
             await self.stop()
             return
