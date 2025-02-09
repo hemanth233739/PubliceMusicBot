@@ -74,7 +74,7 @@ def stream_markup_timer(_, chat_id, played, dur):
         ],
        [
             InlineKeyboardButton(
-                text="ᴄʜᴀᴛ ɢʀᴏᴜᴘ 💌", url=f"{SUPPORT_CHAT}"
+                text="ᴄʜᴀᴛ ɢʀᴏᴜᴘ 💌", url=f"tamilchatting2050"
             ),
             InlineKeyboardButton(
                 text="ᴏᴡɴᴇʀ 💕", user_id=config.OWNER),
@@ -99,7 +99,7 @@ def stream_markup(_, chat_id):
         ],
        [
             InlineKeyboardButton(
-                text="ᴄʜᴀᴛ ɢʀᴏᴜᴘ 💌", url=f"{SUPPORT_CHAT}"
+                text="ᴄʜᴀᴛ ɢʀᴏᴜᴘ 💌", url=f"tamilchatting2050"
             ),
             InlineKeyboardButton(
                 text="ᴏᴡɴᴇʀ 💕", user_id=config.OWNER_ID),
