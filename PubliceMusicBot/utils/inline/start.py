@@ -28,11 +28,11 @@ def private_panel(_):
             InlineKeyboardButton(text=_["S_B_5"], user_id=config.OWNER),
         ],
         [
-             InlineKeyboardButton(text=_["S_B_6"], url=config.SUPPORT_CHANNEL),
-            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),
+             InlineKeyboardButton(text=_["S_B_6"], url="tamilchatting2050"),
+            InlineKeyboardButton(text=_["S_B_2"], url="tamilchatting2050"),
         ],
         [
-            InlineKeyboardButton(text="ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url=f"https://github.com/AbhiModszYT/PubliceMusicBot",)
+            InlineKeyboardButton(text="ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url=f"tamilchatting2050",)
         ],
     ]
     return buttons
